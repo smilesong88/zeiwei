@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紫微每日一卡 - 动态随机版</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>紫微每日一卡 - 探索今日星象指引</title>
+    <meta name="description" content="紫微每日一卡 - 每天随机抽取紫微斗数星曜卡片，探索今日星象指引。包含主星、辅星、天干、杂耀等完整星曜体系。">
+    <meta name="keywords" content="紫微斗数,紫微星,每日一卡,星象,命理,运势">
+    <meta property="og:title" content="紫微每日一卡 - 探索今日星象指引">
+    <meta property="og:description" content="每天随机抽取紫微斗数星曜卡片，探索今日星象指引">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         :root {
@@ -28,7 +34,7 @@
         }
         
         body {
-            font-family: 'Noto Serif TC', serif;
+            font-family: 'Noto Serif SC', 'Noto Serif TC', 'SimSun', serif;
             background: var(--light-bg);
             min-height: 100vh;
             display: flex;
@@ -143,8 +149,8 @@
         }
         
         .star-icon {
-            font-size: 2.2rem; /* 增大10% (原2rem) */
-            margin-bottom: 13.2px; /* 增大10% (原12px) */
+            font-size: 2.2rem;
+            margin-bottom: 13.2px;
             height: 66px;
             display: flex;
             align-items: center;
@@ -156,14 +162,14 @@
         }
         
         .star-name {
-            font-size: 1.232rem; /* 增大10% (原1.12rem) */
+            font-size: 1.232rem;
             font-weight: 700;
-            margin-bottom: 13.2px; /* 增大10% (原12px) */
+            margin-bottom: 13.2px;
             color: var(--primary-color);
         }
         
         .star-desc {
-            font-size: 0.88rem; /* 增大10% (原0.8rem) */
+            font-size: 0.88rem;
             color: var(--text-light);
             line-height: 1.5;
         }
@@ -250,24 +256,24 @@
             
             .star-card {
                 width: 100%;
-                max-width: 170px; /* 增加20px (原为150px) */
+                max-width: 170px;
                 padding: 17px;
                 margin: 5px;
             }
             
             .star-icon {
-                font-size: 1.98rem; /* 增大10% (原1.8rem) */
+                font-size: 1.98rem;
                 height: 60px;
-                margin-bottom: 8.8px; /* 增大10% (原8px) */
+                margin-bottom: 8.8px;
             }
             
             .star-name {
-                font-size: 1.1rem; /* 增大10% (原1rem) */
-                margin-bottom: 8.8px; /* 增大10% (原8px) */
+                font-size: 1.1rem;
+                margin-bottom: 8.8px;
             }
             
             .star-desc {
-                font-size: 0.825rem; /* 增大10% (原0.75rem) */
+                font-size: 0.825rem;
             }
             
             .buttons {
@@ -292,23 +298,23 @@
         /* 小屏幕手机优化 */
         @media (max-width: 480px) {
             .star-card {
-                max-width: 160px; /* 增加20px (原为130px) */
+                max-width: 160px;
                 padding: 20px;
             }
             
             .star-icon {
-                font-size: 2.1rem; /* 增大10% (原1.6rem) */
+                font-size: 2.1rem;
                 height: 55px;
-                margin-bottom: 10px; /* 增大10% (原7px) */
+                margin-bottom: 10px;
             }
             
             .star-name {
-                font-size: 1.5rem; /* 增大10% (原0.9rem) */
-                margin-bottom: 7.7px; /* 增大10% (原7px) */
+                font-size: 1.5rem;
+                margin-bottom: 7.7px;
             }
             
             .star-desc {
-                font-size: 0.9rem; /* 增大10% (原0.7rem) */
+                font-size: 0.9rem;
             }
         }
         
@@ -338,12 +344,15 @@
         <div class="header">
             <h1>紫微每日一卡</h1>
             <div class="subtitle">探索今日星象指引</div>
-            <div class="date" id="current-date">2023年11月15日</div>
+            <div class="date" id="current-date"></div>
         </div>
         
         <div class="card-container" id="card-to-download">
             <div class="stars-container" id="stars-container">
-                <!-- 星曜卡片将由JavaScript动态生成 -->
+                <div id="main-star-card" class="star-card"></div>
+                <div id="minor-star-card" class="star-card"></div>
+                <div id="heavenly-stem-card" class="star-card"></div>
+                <div id="misc-star-card" class="star-card"></div>
             </div>
         </div>
         
@@ -357,22 +366,22 @@
         </div>
         
         <div class="footer">
-           
+            紫微每日一卡 · 每天一份星象指引
         </div>
     </div>
 
     <script>
-        // 优化后的描述文字（不超过34字节）
+        // 主星（14颗）
         const mainStars = [
             { name: "紫微", icon: "crown", color: "#9c27b0", desc: "帝星，尊贵领导权威" },
             { name: "天机", icon: "brain", color: "#2196f3", desc: "智慧星，聪明机智变动" },
             { name: "太阳", icon: "sun", color: "#ff9800", desc: "光明星，热情活力表现" },
-            { name: "武曲", icon: "dollar-sign", color: "#4caf50", desc: "财星，财富决断执行" },
+            { name: "武曲", icon: "coins", color: "#4caf50", desc: "财星，财富决断执行" },
             { name: "天同", icon: "heart", color: "#e91e63", desc: "福星，温和人缘享受" },
             { name: "廉贞", icon: "fire", color: "#f44336", desc: "次桃花，复杂变化野心" },
             { name: "天府", icon: "gem", color: "#673ab7", desc: "库星，包容稳重财富" },
             { name: "太阴", icon: "moon", color: "#03a9f4", desc: "母性星，温柔内向富足" },
-            { name: "贪狼", icon: "wolf-pack-battalion", color: "#ff5722", desc: "桃花星，欲望才华交际" },
+            { name: "贪狼", icon: "star", color: "#ff5722", desc: "桃花星，欲望才华交际" },
             { name: "巨门", icon: "door-closed", color: "#795548", desc: "暗星，口舌是非思考" },
             { name: "天相", icon: "balance-scale", color: "#607d8b", desc: "印星，辅佐协调信誉" },
             { name: "天梁", icon: "mountain", color: "#009688", desc: "荫星，庇佑清高医药" },
@@ -380,37 +389,40 @@
             { name: "破军", icon: "bomb", color: "#7b1fa2", desc: "耗星，破坏开创变动" }
         ];
         
+        // 辅星（12颗）
         const minorStars = [
             { name: "文昌", icon: "pen-nib", color: "#009688", desc: "文运星，才华学识艺术" },
             { name: "文曲", icon: "pen-fancy", color: "#009688", desc: "才艺星，文艺口才技艺" },
             { name: "左辅", icon: "hand-holding-heart", color: "#795548", desc: "辅助星，帮助支持贵人" },
             { name: "右弼", icon: "hands-helping", color: "#795548", desc: "辅佐星，协助暗中帮助" },
-            { name: "天魁", icon: "award", color: "#ffeb3b", desc: "阳贵人，显性帮助机遇" },
-            { name: "天钺", icon: "shield-alt", color: "#ffeb3b", desc: "阴贵人，隐性暗中支持" },
+            { name: "天魁", icon: "award", color: "#ffc107", desc: "阳贵人，显性帮助机遇" },
+            { name: "天钺", icon: "shield-halved", color: "#ffc107", desc: "阴贵人，隐性暗中支持" },
             { name: "火星", icon: "fire", color: "#ff5722", desc: "暴烈星，急躁冲突意外" },
             { name: "铃星", icon: "bell", color: "#ff5722", desc: "暗火星，暗争口舌小人" },
-            { name: "擎羊", icon: "horse-head", color: "#f44336", desc: "刑伤星，伤害冲突意外" },
-            { name: "陀罗", icon: "redo", color: "#f44336", desc: "拖延星，阻碍反复纠缠" },
+            { name: "擎羊", icon: "horse", color: "#f44336", desc: "刑伤星，伤害冲突意外" },
+            { name: "陀罗", icon: "rotate", color: "#f44336", desc: "拖延星，阻碍反复纠缠" },
             { name: "地空", icon: "cloud", color: "#9e9e9e", desc: "空亡星，空想不切实际" },
             { name: "地劫", icon: "mountain", color: "#9e9e9e", desc: "劫煞星，波折破财损失" }
         ];
         
+        // 天干（10个）
         const heavenlyStems = [
             { name: "甲", icon: "tree", color: "#4caf50", desc: "阳木，新生成长" },
             { name: "乙", icon: "leaf", color: "#4caf50", desc: "阴木，柔韧适应" },
             { name: "丙", icon: "sun", color: "#ff9800", desc: "阳火，光明热情" },
             { name: "丁", icon: "fire", color: "#f44336", desc: "阴火，温暖文明" },
             { name: "戊", icon: "mountain", color: "#795548", desc: "阳土，稳固厚重" },
-            { name: "己", icon: "globe-asia", color: "#795548", desc: "阴土，包容承载" },
+            { name: "己", icon: "earth-americas", color: "#795548", desc: "阴土，包容承载" },
             { name: "庚", icon: "gavel", color: "#607d8b", desc: "阳金，刚毅变革" },
-            { name: "辛", icon: "gem", color: "#ffeb3b", desc: "阴金，精致贵重" },
+            { name: "辛", icon: "gem", color: "#ffc107", desc: "阴金，精致贵重" },
             { name: "壬", icon: "water", color: "#2196f3", desc: "阳水，流动智慧" },
             { name: "癸", icon: "droplet", color: "#03a9f4", desc: "阴水，润泽内敛" }
         ];
         
+        // 杂耀（29颗）
         const miscStars = [
             { name: "台辅", icon: "building", color: "#673ab7", desc: "辅佐星，名誉地位助力" },
-            { name: "封诰", icon: "scroll", color: "#ffeb3b", desc: "荣誉星，封赏名誉地位" },
+            { name: "封诰", icon: "scroll", color: "#ffc107", desc: "荣誉星，封赏名誉地位" },
             { name: "恩光", icon: "sun", color: "#ff9800", desc: "恩宠星，贵人相助恩惠" },
             { name: "三台", icon: "layer-group", color: "#673ab7", desc: "台阁星，地位名誉助力" },
             { name: "八座", icon: "chair", color: "#673ab7", desc: "尊贵星，地位权力尊重" },
@@ -420,20 +432,20 @@
             { name: "解神", icon: "peace", color: "#4caf50", desc: "化解星，解决问题化吉" },
             { name: "华盖", icon: "cloud", color: "#9e9e9e", desc: "艺术星，才华孤独宗教" },
             { name: "咸池", icon: "heart", color: "#e91e63", desc: "桃花星，人缘感情魅力" },
-            { name: "天才", icon: "lightbulb", color: "#ffeb3b", desc: "才智星，智慧创意天赋" },
+            { name: "天才", icon: "lightbulb", color: "#ffc107", desc: "才智星，智慧创意天赋" },
             { name: "天寿", icon: "heartbeat", color: "#4caf50", desc: "长寿星，健康长寿福气" },
             { name: "天月", icon: "cloud-moon", color: "#03a9f4", desc: "疾病星，健康问题隐忧" },
-            { name: "天喜", icon: "laugh", color: "#e91e63", desc: "喜庆星，婚庆添丁喜事" },
+            { name: "天喜", icon: "face-laugh", color: "#e91e63", desc: "喜庆星，婚庆添丁喜事" },
             { name: "天姚", icon: "venus", color: "#e91e63", desc: "桃花星，浪漫感情魅力" },
-            { name: "天贵", icon: "crown", color: "#ffeb3b", desc: "贵人星，贵人相助地位" },
-            { name: "天德", icon: "sun", color: "#ffeb3b", desc: "吉星，福报庇佑贵人" },
+            { name: "天贵", icon: "crown", color: "#ffc107", desc: "贵人星，贵人相助地位" },
+            { name: "天德", icon: "sun", color: "#ffc107", desc: "吉星，福报庇佑贵人" },
             { name: "天官", icon: "user-tie", color: "#795548", desc: "官禄星，官职地位名誉" },
-            { name: "天福", icon: "smile", color: "#4caf50", desc: "福气星，福报好运顺利" },
+            { name: "天福", icon: "face-smile", color: "#4caf50", desc: "福气星，福报好运顺利" },
             { name: "天巫", icon: "hat-wizard", color: "#673ab7", desc: "神秘星，玄学宗教信仰" },
             { name: "天刑", icon: "gavel", color: "#795548", desc: "司法星，纪律约束惩罚" },
-            { name: "天哭", icon: "sad-tear", color: "#9e9e9e", desc: "悲伤星，忧愁伤感不顺" },
+            { name: "天哭", icon: "face-sad-tear", color: "#9e9e9e", desc: "悲伤星，忧愁伤感不顺" },
             { name: "天虚", icon: "ghost", color: "#9e9e9e", desc: "虚耗星，空虚不实损耗" },
-            { name: "寡宿", icon: "home", color: "#9e9e9e", desc: "孤寡星，孤独晚婚分离" },
+            { name: "寡宿", icon: "house", color: "#9e9e9e", desc: "孤寡星，孤独晚婚分离" },
             { name: "蜚廉", icon: "bug", color: "#795548", desc: "是非星，谣言诽谤口舌" },
             { name: "阴煞", icon: "ghost", color: "#607d8b", desc: "暗影星，小人是非阻碍" },
             { name: "劫煞", icon: "bolt", color: "#ff9800", desc: "劫数星，意外波折损失" },
@@ -445,11 +457,16 @@
         let isRotating = true;
         let currentMainStar, currentMinorStar, currentHeavenlyStem, currentMiscStar;
         
-        // 设置当前日期
+        // 设置当前日期（简体中文）
         function setCurrentDate() {
             const now = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = now.toLocaleDateString('zh-TW', options);
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+            const weekDay = weekDays[now.getDay()];
+            document.getElementById('current-date').textContent = 
+                year + '年' + month + '月' + day + '日 星期' + weekDay;
         }
         
         // 随机选择数组中的一项
@@ -465,8 +482,8 @@
         // 创建星曜卡片
         function createStarCard(star, elementId) {
             const starCard = document.getElementById(elementId);
+            if (!starCard) return;
             
-            // 随机决定是否翻转图标
             const flipClass = shouldFlipIcon() ? 'flipped' : '';
             
             starCard.innerHTML = `
@@ -477,7 +494,6 @@
                 <div class="star-desc">${star.desc}</div>
             `;
             
-            // 添加淡入动画
             starCard.classList.remove('fade-in');
             void starCard.offsetWidth;
             starCard.classList.add('fade-in');
@@ -504,7 +520,6 @@
             
             rotationInterval = setInterval(updateAllCards, 50);
             
-            // 添加脉冲动画
             document.querySelectorAll('.star-card').forEach(card => {
                 card.classList.add('pulsing');
             });
@@ -517,7 +532,6 @@
             document.getElementById('pause-btn').innerHTML = '<i class="fas fa-play"></i> 继续';
             document.getElementById('pause-btn').classList.add('btn-pause');
             
-            // 移除脉冲动画
             document.querySelectorAll('.star-card').forEach(card => {
                 card.classList.remove('pulsing');
             });
@@ -552,17 +566,7 @@
         // 初始化页面
         window.onload = function() {
             setCurrentDate();
-            
-            const starsContainer = document.getElementById('stars-container');
-            starsContainer.innerHTML = `
-                <div id="main-star-card" class="star-card"></div>
-                <div id="minor-star-card" class="star-card"></div>
-                <div id="heavenly-stem-card" class="star-card"></div>
-                <div id="misc-star-card" class="star-card"></div>
-            `;
-            
             startRotation();
-            
             document.getElementById('pause-btn').addEventListener('click', toggleRotation);
         };
     </script>
